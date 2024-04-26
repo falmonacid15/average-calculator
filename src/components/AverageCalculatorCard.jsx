@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GradesInput from "./GradesInput";
 import { IoMdAdd, IoMdAddCircleOutline } from "react-icons/io";
+import { LuPlus } from "react-icons/lu";
 
 const AverageCalculatorCard = () => {
   const [scoresInputs, setScoresInputs] = useState([]);
@@ -51,9 +52,9 @@ const AverageCalculatorCard = () => {
       <div id="add-input-button">
         <button
           onClick={inputCounterHandler}
-          className="bg-primary-light dark:bg-primary-dark hover:bg-slate-200 dark:hover:bg-primary-400 p-2 rounded-xl"
+          className="btn btn-circle btn-outline"
         >
-          <IoMdAddCircleOutline className="text-slate-50 hover:text-lime-400 text-2xl" />
+          <LuPlus className="text-success-light dark:text-success-dark w-6 h-6" />
         </button>
       </div>
     </div>

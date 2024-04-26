@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
+import { LuTrash, LuTrash2 } from "react-icons/lu";
 
 const GradesInput = ({ inputValue, deleteInput, index }) => {
   const [weighing, setWeighing] = useState("");
@@ -72,10 +73,10 @@ const GradesInput = ({ inputValue, deleteInput, index }) => {
           />
         </div>
         <button
-          className="mt-5 bg-slate-200 dark:bg-button p-2 rounded-full"
+          className="mt-5 btn btn-circle btn-outline btn-sm"
           onClick={() => deleteInput(index)}
         >
-          <BiTrash className="text-xl text-red-500 hover:scale-110" />
+          <LuTrash className="text-error-light dark:text-error-dark" />
         </button>
       </div>
     </div>

@@ -8,8 +8,7 @@ function App() {
   return (
     <div className="bg-base-light-100 dark:bg-base-dark-100 h-screen">
       <Navbar />
-      <ThemeSwitch />
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-2 mt-4">
         <AverageCalculatorCard />
         <SignaturesCard />
       </div>

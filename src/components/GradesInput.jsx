@@ -1,34 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BiTrash } from "react-icons/bi";
-import { LuTrash, LuTrash2 } from "react-icons/lu";
+import { LuTrash } from "react-icons/lu";
 
-const GradesInput = ({ inputValue, deleteInput, index }) => {
-  const [weighing, setWeighing] = useState("");
-  const [score, setScore] = useState("");
-
-  const weighingHandleChange = (event) => {
-    const inputValue = event.target.value;
-    // Verificar si el valor es una cadena vacía o numérico y está dentro del rango
-    if (
-      inputValue === "" ||
-      (!isNaN(inputValue) && inputValue >= 1 && inputValue <= 99)
-    ) {
-      setWeighing(inputValue);
-    }
+const GradesInput = ({ inputValue, deleteInput, index, handleChange }) => {
+  const handleChangeInput = (score, weighing, index) => {
+    handleChange({ score: score, weighing: weighing }, index);
   };
-
-  const scoreHandleChange = (event) => {
-    const inputValue = event.target.value;
-    // Verificar si el valor es una cadena vacía o numérico y está dentro del rango
-    if (
-      inputValue === "" ||
-      (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 20)
-    ) {
-      setScore(inputValue);
-    }
-  };
-
-  useEffect(() => {}, []);
 
   return (
     <div id="grades-input" className="flex justify-center py-2">
@@ -50,8 +26,10 @@ const GradesInput = ({ inputValue, deleteInput, index }) => {
             className="bg-base-light-300 dark:bg-base-dark-300 border border-gray-300 text-gray-900 dark:text-neutral-50  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-16 p-2.5  dark:border-gray-600 placeholder-neutral-200 dark:placeholder-neutral-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="0.0"
             required
-            value={score}
-            onChange={scoreHandleChange}
+            value={inputValue.score}
+            onChange={(e) =>
+              handleChangeInput(e.target.value, inputValue.weighing, index)
+            }
           />
         </div>
         <div id="weighing">
@@ -67,8 +45,7 @@ const GradesInput = ({ inputValue, deleteInput, index }) => {
             aria-describedby="helper-text-explanation"
             className="bg-base-light-300 dark:bg-base-dark-300 border border-gray-300 text-gray-900 dark:text-neutral-50  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-16 p-2.5  dark:border-gray-600 placeholder-neutral-200 dark:placeholder-neutral-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="1"
-            value={weighing}
-            onChange={weighingHandleChange}
+            onChange={handleChangeInput}
             required
           />
         </div>

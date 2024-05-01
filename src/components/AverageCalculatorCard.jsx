@@ -1,38 +1,27 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import GradesInput from "./GradesInput";
-import { IoMdAdd, IoMdAddCircleOutline } from "react-icons/io";
 import { LuPlus } from "react-icons/lu";
 
 const AverageCalculatorCard = () => {
   const [scoresInputs, setScoresInputs] = useState([]);
 
-  const arraytest = Array(4);
-
-  const minInputs = 2;
-  const maxInputs = 10;
-
-  const [inputCounter, setInputCounter] = useState(0);
-
-  function inputCounterHandler() {
-    setInputCounter((prevState) => prevState + 1);
-  }
-
   function deleteScoreInput(index) {
     setScoresInputs((prevState) => prevState.filter((_, i) => i !== index));
-    setInputCounter(inputCounter - 1);
   }
 
-  function handleInputValue({ score, weighing }) {
-    setScoresInputs((prevState) => [
-      ...prevState,
-      {
-        id: prevState.length,
-        score: score,
-        weighing: weighing,
-      },
-    ]);
+  function handleAddNewInput({}) {
+    setScoresInputs((prevState) => [...prevState, { score: 0, weighing: 0 }]);
   }
 
+  function handleChangeScoreInput(score, weighing, index) {
+    setScoresInputs((prevState) => {
+      console.log("prev", prevState[index], index);
+      prevState[index] = { score: score, weighing: weighing };
+      return [...prevState];
+    });
+  }
+
+  console.log(scoresInputs);
   return (
     <div
       id="average-calculator-card"
@@ -46,12 +35,21 @@ const AverageCalculatorCard = () => {
           Ingrese sus notas
         </p>
       </div>
-      <div id="calculator" className="p-2 flex-col">
-        <GradesInput deleteInput={deleteScoreInput} />
+      <div id="calculator" className="p-2 flex-col grades-input">
+        {Array.isArray(scoresInputs) &&
+          scoresInputs.map((input, index) => (
+            <GradesInput
+              key={index}
+              inputValue={input}
+              deleteInput={deleteScoreInput}
+              index={index}
+              handleChange={handleChangeScoreInput}
+            />
+          ))}
       </div>
       <div id="add-input-button">
         <button
-          onClick={inputCounterHandler}
+          onClick={handleAddNewInput}
           className="btn btn-circle btn-outline"
         >
           <LuPlus className="text-success-light dark:text-success-dark w-6 h-6" />

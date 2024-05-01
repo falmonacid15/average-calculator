@@ -1,4 +1,3 @@
-import React from "react";
 import { LiaNewspaper } from "react-icons/lia";
 import ThemeSwitch from "./ThemeSwitch";
 
